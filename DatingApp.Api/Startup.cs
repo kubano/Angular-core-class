@@ -30,7 +30,8 @@ namespace DatingApp.Api
         {
 
             services.AddDbContext<DataContext>(x => x.UseSqlite(Configuration.GetConnectionString("DefaultConnection")));
-            // Register the Swagger generator, defining 1 or more Swagger documents
+            services.AddScoped<IAuthRepository, AuthRepository>();
+
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new Info { Title = "Dating App API", Version = "v1" });
