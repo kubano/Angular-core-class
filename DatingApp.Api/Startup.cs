@@ -67,6 +67,7 @@ namespace DatingApp.Api
             }
 
             app.UseCors(x => x.AllowAnyOrigin().AllowAnyHeader().AllowAnyOrigin());
+            
             app.UseSwagger();
             app.UseSwaggerUI(c =>
             {
