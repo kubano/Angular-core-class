@@ -12,5 +12,6 @@ namespace DatingApp.Api.Dtos
         public DateTime Created { get; set; }
         public DateTime LastActive { get; set; }
         public string City { get; set; }
+        public string PhotoUrl { get; set; }
     }
 }

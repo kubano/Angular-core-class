@@ -15,7 +15,8 @@ namespace DatingApp.Api.Data
         }
         public async Task<User> Login(string username, string password)
         {
-            var user = await _dbContext.Users.FirstOrDefaultAsync(u => u.Username.Equals(username));
+            var user = await _dbContext.Users.FirstOrDefaultAsync(u => u.Username == username);
+            
             if (user is null) return null;
 
             if (!VeryfyPasswordHash(password, user.PasswordHash, user.PasswordSalt)) return null;
