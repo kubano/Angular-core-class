@@ -40,6 +40,23 @@ namespace DatingApp.Api.Data
             return true;
         }
 
+        public User RegisterSync(User user, string password)
+        {
+            byte[] passwordHash, passwordSalt;
+
+            CreatePasswordHash(password, out passwordHash, out passwordSalt);
+
+            user.Username = user.Username.ToLower();
+            user.PasswordHash = passwordHash;
+            user.PasswordSalt = passwordSalt;
+
+            _dbContext.Users.Add(user);
+            
+            _dbContext.SaveChanges();
+
+            return user;
+        }
+
         public async Task<User> Register(User user, string password)
         {
             byte[] passwordHash, passwordSalt;
@@ -50,6 +67,7 @@ namespace DatingApp.Api.Data
             user.PasswordSalt = passwordSalt;
 
             await _dbContext.Users.AddAsync(user);
+            
             await _dbContext.SaveChangesAsync();
 
             return user;
