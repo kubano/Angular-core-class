@@ -20,6 +20,7 @@ namespace DatingApp.Api.Data
             var userData = System.IO.File.ReadAllText("Data/userSeedData.json");
 
             var users = JsonConvert.DeserializeObject<List<User>>(userData);
+            
             IAuthRepository repo = new AuthRepository(_dbContext);
 
             foreach (var user in users)

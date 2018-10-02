@@ -2,8 +2,11 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { HttpClientModule } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
-import { BsDropdownModule } from 'ngx-bootstrap';
+import { BsDropdownModule, TabsModule } from 'ngx-bootstrap';
 import { RouterModule } from '@angular/router';
+import { JwtModule } from '@auth0/angular-jwt';
+import { NgxGalleryModule } from 'ngx-gallery';
+
 
 
 import { AppComponent } from './app.component';
@@ -21,6 +24,16 @@ import { appRoutes } from './routes';
 import { AuthGuard } from './_guards/auth.guard';
 import { UserService } from './_services/user.service';
 import { MemberCardComponent } from './members/member-card/member-card.component';
+import { MemberDetailComponent } from './members/member-detail/member-detail.component';
+import { MemberDetailResolver } from './_resolvers/member-detail.resolver';
+import { MemberListResolver } from './_resolvers/member-list.resolver';
+
+export function tokenGetter() {
+  return localStorage.getItem('token');
+
+}
+
+
 
 @NgModule({
    declarations: [
@@ -31,14 +44,24 @@ import { MemberCardComponent } from './members/member-card/member-card.component
       MemberListComponent,
       ListsComponent,
       MessagesComponent,
-      MemberCardComponent
+      MemberCardComponent,
+      MemberDetailComponent
    ],
    imports: [
       BrowserModule,
       HttpClientModule,
       FormsModule,
+      TabsModule.forRoot(),
       BsDropdownModule.forRoot(),
-      RouterModule.forRoot(appRoutes)
+      RouterModule.forRoot(appRoutes),
+      NgxGalleryModule,
+      JwtModule.forRoot({
+        config: {
+          tokenGetter: tokenGetter,
+          whitelistedDomains: ['localhost:5000'],
+          blacklistedRoutes: ['localhost:5000/auth']
+        }
+      })
    ],
    providers: [
       AuthService,
@@ -46,7 +69,9 @@ import { MemberCardComponent } from './members/member-card/member-card.component
       AlertifyService,
       NotyService,
       AuthGuard,
-      UserService
+      UserService,
+      MemberDetailResolver,
+      MemberListResolver
    ],
    bootstrap: [
       AppComponent
