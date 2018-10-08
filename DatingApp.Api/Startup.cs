@@ -43,7 +43,7 @@ namespace DatingApp.Api
 
             services.AddSwaggerGen(c =>
             {
-                c.SwaggerDoc("v1", new Info { Title = "Dating App API", Version = "v1" });
+                c.SwaggerDoc("v1", new Info { Title = "Dating App API", Version = "v1.2" });
             });
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1)
             .AddJsonOptions(o => {
