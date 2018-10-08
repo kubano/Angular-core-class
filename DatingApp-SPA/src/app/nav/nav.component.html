@@ -17,7 +17,7 @@
          Welcome {{authService.loggedUser | titlecase}}
        </a>
        <div class="dropdown-menu mt-3" *dropdownMenu>
-         <a class="dropdown-item"><i class="fa fa-user-circle"></i>&nbsp;Edit Profile</a>
+         <a class="dropdown-item" [routerLink]="['member/edit']"><i class="fa fa-user-circle"></i>&nbsp;Edit Profile</a>
          <div class="dropdown-divider"></div>
          <a class="dropdown-item" (click)="logout()"><i class="fa fa-sign-out"></i>&nbsp;Logout</a>
        </div>
@@ -29,3 +29,4 @@
      </form>
   </div>
  </nav>
+ 
