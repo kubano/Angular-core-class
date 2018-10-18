@@ -1,3 +1,4 @@
+using System.Security.Claims;
 using System.Threading.Tasks;
 using AutoMapper;
 using DatingApp.Api.Data;
@@ -41,5 +42,17 @@ namespace DatingApp.Api.Controllers
 
             return Ok(dto);
         }
+
+        [HttpPut("{id}")]
+        public async Task<IActionResult> UpdateUser(UserForUpdateDto dto) {
+            
+        if (dto.Id != int.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value).ToString()) return Unauthorized();
+
+
+            var user = await _repo.GetUser(dto.Id);
+
+            return Ok();
+        }
+
     }
 }
