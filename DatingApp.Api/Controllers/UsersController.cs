@@ -47,7 +47,7 @@ namespace DatingApp.Api.Controllers
         public async Task<IActionResult> UpdateUser(UserForUpdateDto dto) {
             
         if (dto.Id != int.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value).ToString()) return Unauthorized();
-
+ 
 
             var user = await _repo.GetUser(dto.Id);
 
